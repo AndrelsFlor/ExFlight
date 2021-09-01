@@ -3,7 +3,17 @@ defmodule Flightex.Users.User do
   @enforce_keys @keys
   defstruct @keys
 
-  def build do
-    # TO DO
+  def build(%{name: name, email: email, cpf: cpf}) do
+    {
+      :ok,
+      %__MODULE__{
+        id: UUID.uuid4(),
+        name: name,
+        email: email,
+        cpf: cpf
+      }
+    }
   end
+
+  def build(_), do: {:error, "Invalid parameters"}
 end
