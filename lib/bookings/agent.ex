@@ -9,9 +9,11 @@ defmodule Flightex.Bookings.Agent do
 
   def save(%Booking{} = booking), do: Agent.update(__MODULE__, &update_state(&1, booking))
 
-  def get(id), do: Agent.get(__MODULE__, &get_user(&1, id))
+  def get(id), do: Agent.get(__MODULE__, &get_booking(&1, id))
 
-  defp get_user(state, cpf) do
+  def list_all, do: Agent.get(__MODULE__, & &1)
+
+  defp get_booking(state, cpf) do
     case(Map.get(state, cpf)) do
       nil -> {:error, "Booking not found"}
       user -> {:ok, user}

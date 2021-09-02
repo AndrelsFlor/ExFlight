@@ -6,6 +6,7 @@ defmodule Flightex do
   alias Flightex.Bookings.Agent, as: BookingAgent
   alias Flightex.Bookings.CreateOrUpdate, as: CreateOrUpdateBooking
   alias Flightex.Bookings.Get, as: GetBooking
+  alias Flightex.Bookings.Report, as: ReportBooking
 
   def start_agents do
     UserAgent.start_link(%{})
@@ -17,4 +18,5 @@ defmodule Flightex do
 
   defdelegate create_booking(user_id, params), to: CreateOrUpdateBooking, as: :call
   defdelegate get_booking(id), to: GetBooking, as: :call
+  defdelegate generate_report(filename \\ "report.csv"), to: ReportBooking, as: :create
 end
